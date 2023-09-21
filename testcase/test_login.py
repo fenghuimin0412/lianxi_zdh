@@ -4,9 +4,7 @@
 from libs.login import Login
 from utils.yamlControl import get_yaml_data
 import pytest
-import allure
 import os
-import json
 
 class TestLogin:
     @pytest.mark.parametrize('req_body,exp_data',get_yaml_data('../data/loginCase.yaml'))
@@ -15,10 +13,10 @@ class TestLogin:
         #2.Login加个括号代表实例化
         #3.数据驱动
         res=Login().login(req_body)
-        #print(res.json().get('msg'))
         assert res.json().get('msg') == exp_data['msg']
 
 if __name__ == '__main__':
-    pytest.main(["test_login.py", "-s", "--alluredir", "../report/tmp"])
+    #pytest.main(["test_login.py", "-s", "--alluredir", "../report/tmp"])
+    os.system("pytest test_login.py --alluredir=../report/tmp --clean-alluredir")
     #使用allure 产生报告
     os.system("allure serve ../report/tmp")

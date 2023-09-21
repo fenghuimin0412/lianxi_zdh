@@ -5,13 +5,14 @@ def get_yaml_data(fileDir):
     fo = open(fileDir,'r',encoding="utf-8")
     # 2.使用yaml方法获取数据
     res = yaml.load(fo,Loader=yaml.FullLoader)
-    fo.close()
     for i in res:
         resList.append((i['data'],i['resp']))
+    fo.close()
+    print(resList)
     return resList
 
 if __name__ == '__main__':
     filepath = ('../data/loginCase.yaml')
     res = get_yaml_data(filepath)
-    for i in res:
-        print(i)
+    # for i in res:
+    #     print(i)
